@@ -35,10 +35,10 @@ First of all, download the repository by running:
 
 Before training or testing any of the DNN available in this project, you must create some directories by running the following commands:
 
-`mkdir plots`
-`mkdir results`
-`mkdir ckpt`
-`mkdir npys`
+`mkdir plots` <br>
+`mkdir results` <br>
+`mkdir ckpt` <br>
+`mkdir npys` <br>
 
 1. To train the network run:
 
@@ -55,8 +55,7 @@ http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/ that need to be located at the r
 
 # Dataset
 
-The dataset used for train and test the DNN can be downloaded at the following link: <br>
-https://www.kaggle.com/c/dogs-vs-cats-redux-kernels-edition/data
+The dataset used for train and test the DNN can be downloaded at the following link: https://www.kaggle.com/c/dogs-vs-cats-redux-kernels-edition/data
 
 Once downloaded, you must unzip and locate it under the root project in order to make everything going smooth.
 
@@ -66,6 +65,7 @@ In case something goes wrong, make sure:
 
 1. You've created all the required directories
 2. Any configuration path is rightly set-up
+3. You've the right library versions
 
 # Authors
 
