@@ -1,8 +1,6 @@
 from __future__ import print_function
 
 import os
-os.environ['TF_CPP_MIN_VLOG_LEVEL'] = '3'
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 import sys
 import numpy as np
@@ -16,79 +14,78 @@ from lenet import LeNet
 from deepconvnet import DeepConv
 from alexnet import AlexNet
 
-# from deep_cnn_model import DeepModel
 from configs import Config
 from tools.loader import init_data
 
-plot_dir = 'plots'
+graph_dir = '/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/graphs/'
 
-# For Plots
-epoches = []
-y_training_loss = []
-y_training_accuracy = []
-y_valid_loss = []
-y_valid_accuracy = []
 
-def save_plot_files(model_name, epoches, loss, acc, is_training=True):
+
+def save_plot_files(model_name, steps, loss, acc, is_training=True):
 
     if is_training == True:
 
-        y_training_loss.append(acc)
-        y_training_accuracy.append(loss)
-
         title1 = 'training_loss.png'
         title2 = 'training_acc.png'
-        x_label = '#Epoches'
+        x_label = '#steps'
         y1_label = 'Training Loss'
         y2_label = 'Training Acc'
 
         # saving loss
         plt.clf()
-        plt.plot(epoches, y_training_loss)
+        plt.plot(steps, loss)
         plt.xlabel(x_label)
         plt.ylabel(y1_label)
-        plt.savefig(plot_dir + '/' + model_name + '/' + title1)
+        plt.savefig(graph_dir + '/' + model_name + '/' + title1)
 
         # saving accuracy
         plt.clf()
-        plt.plot(epoches, y_training_accuracy)
+        plt.plot(steps, acc)
         plt.xlabel(x_label)
         plt.ylabel(y2_label)
-        plt.savefig(plot_dir + '/' + model_name + '/' + title2)
+        plt.savefig(graph_dir + '/' + model_name + '/' + title2)
 
     else:
-        y_valid_loss.append(loss)
-        y_valid_accuracy.append(acc)
 
         title1 = 'validation_loss.png'
         title2 = 'validation_acc.png'
-        x_label = '#Epoches'
+        x_label = '#steps'
         y1_label = 'Validation Loss'
         y2_label = 'Validation Acc'
 
         # saving loss
         plt.clf()
-        plt.plot(epoches, y_valid_loss)
+        plt.plot(steps, loss)
         plt.xlabel(x_label)
         plt.ylabel(y1_label)
-        plt.savefig(plot_dir + '/' + model_name + '/' + title1)
+        plt.savefig(graph_dir + '/' + model_name + '/' + title1)
 
         # saving accuracy
         plt.clf()
-        plt.plot(epoches, y_valid_accuracy)
+        plt.plot(steps, acc)
         plt.xlabel(x_label)
         plt.ylabel(y2_label)
-        plt.savefig(plot_dir + '/' + model_name + '/' + title2)
+        plt.savefig(graph_dir + '/' + model_name + '/' + title2)
 
 
 def run(model, train_batches, valid_batches):
 
+    # For Plots
+    steps_train = []
+    steps_val = []
+    y_training_loss = []
+    y_training_accuracy = []
+    y_valid_loss = []
+    y_valid_accuracy = []
+
     print('Training the model')
 
     # create grap dir for each model
-    if not os.path.isdir(plot_dir + '/' + model.config.model_name):
-        os.mkdir(plot_dir + '/' + model.config.model_name)
+    if not os.path.isdir(graph_dir + '/' + model.config.model_name):
+        os.mkdir(graph_dir + '/' + model.config.model_name)
 
+    step_train = 1
+    step_val = 1
     try:
         for epoch in range(model.epochs):
 
@@ -109,11 +106,21 @@ def run(model, train_batches, valid_batches):
 
                 # print("loss: %.9f, acc %.9f" % (batch_train_loss, batch_train_acc))
 
-                train_acc += batch_train_acc
                 train_loss += batch_train_loss
+                train_acc += batch_train_acc
+
+                #plot variables
+                y_training_loss.append(batch_train_loss)
+                y_training_accuracy.append(batch_train_acc)
+                steps_train.append(step_train)
+                step_train += 1
+
+            #saving loss and acc on train batches
+            save_plot_files(model.config.model_name, steps_train, y_training_loss, y_training_accuracy, True)
 
             avg_train_loss = train_loss/len(train_batches)
             avg_train_acc = train_acc/len(train_batches)
+
             print('Epoch: %d, Train Loss: %f, Train  Acc: %f' % (epoch + 1, avg_train_loss, avg_train_acc))
 
 
@@ -130,8 +137,18 @@ def run(model, train_batches, valid_batches):
                 val_acc += batch_val_acc
                 val_loss += batch_val_loss
 
+                # plot variables
+                y_valid_loss.append(batch_val_loss)
+                y_valid_accuracy.append(batch_val_acc)
+                steps_val.append(step_val)
+                step_val += 1
+
+            #saving loss and acc on val batches
+            save_plot_files(model.config.model_name, steps_val, y_valid_loss, y_valid_accuracy, False)
+
             avg_val_loss = val_loss/len(valid_batches)
             avg_val_acc = val_acc/len(valid_batches)
+
             print('Epoch: %d, Valid Loss: %f, Valid Acc: %f' % (epoch + 1, avg_val_loss, avg_val_acc))
 
             # Save model after every epoch
@@ -140,10 +157,7 @@ def run(model, train_batches, valid_batches):
 
             #storing tensorboard results after every epoch
             model.writer.add_summary(summary, epoch)
-            epoches.append(epoch)
 
-            save_plot_files(model.config.model_name, epoches, avg_train_loss, avg_train_acc)
-            save_plot_files(model.config.model_name, epoches, avg_val_loss, avg_val_acc, is_training=False)
 
     except KeyboardInterrupt:
         print ('Training interrupted!')
@@ -153,16 +167,11 @@ def run(model, train_batches, valid_batches):
 
 if __name__ == '__main__':
 
-    model_type = 'LE-NET'
+    model_type = sys.argv[1]
 
     # Initialize model
     graph = tf.Graph()
-    # tf.logging.set_verbosity(tf.logging.ERROR)
-    # gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.9)
-    # sess_config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True, gpu_options=gpu_options)
-    # sess_config.gpu_options.allow_growth = True
     sess = tf.Session()
-
 
     if model_type == 'LE-NET':
         config = Config(model_type)

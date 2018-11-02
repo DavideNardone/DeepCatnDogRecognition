@@ -45,8 +45,8 @@ class Config(object):
             # Hyperparameters
             self.lr = 0.001
             self.dropout = 0.5
-            self.batch_size = 32
-            self.mini_batch_size = 16
+            self.batch_size = 128
+            self.mini_batch_size = 128
             self.epochs = 100
             self.threshold = 0.5
             self.train_layers = ['fc8', 'fc7']
