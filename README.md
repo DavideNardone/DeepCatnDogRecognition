@@ -22,7 +22,7 @@ Each of these DNN is really sensible to several hyperparameters, which in turn p
 # Requirements
 
   - python 2.7 <br>
-  - tensorflow 1.9.0 <br>
+  - tensorflow 1.9.0 or greater <br>
   - opencv <br>
   
 # Usage
