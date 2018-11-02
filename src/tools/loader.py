@@ -1,18 +1,15 @@
 from __future__ import print_function
 
-import numpy as np    		# dealing with arrays
-import os              		# dealing with directories
-import sys
-import matplotlib.pyplot as plt
-import cv2
+import numpy as np
+import os
 import process_data as pi
+import cPickle as pickle
 
-TRAIN_DIR = '/media/data/davidenardone/dataset/DOG_AND_CAT/train/'
-TEST_DIR = '/media/data/davidenardone/dataset/DOG_AND_CAT/test/'
-IMG_DIR = '/media/data/davidenardone/dataset/DOG_AND_CAT/npys/'
-BATCH_DIR = '/media/data/davidenardone/dataset/DOG_AND_CAT/batches/'
+TRAIN_DIR = 'train/'
+TEST_DIR = 'test/'
+IMG_DIR = 'npys/'
 
-IMG_SIZES = [32, 64, 150]
+IMG_SIZES = [64, 227]
 PIXEL_DEPTH = 255.0
 
 
@@ -28,7 +25,6 @@ def label_img(img):
 def load_data(config):
 
     # read and pre-process images for each class
-
     train_dogs = []
     train_cats = []
 
@@ -40,21 +36,12 @@ def load_data(config):
         for img in os.listdir(TRAIN_DIR):
 
             if model_name == 'Alex-Net':
-                img = pi.process_image(TRAIN_DIR + img, img_size, PIXEL_DEPTH, mean_vec=config.MEAN)
+                img = pi.process_image(TEST_DIR + img, img_size)
             else:
-                img = pi.process_image(TRAIN_DIR + img, img_size, PIXEL_DEPTH, mean_vec=None)
-                img = pi.normalize_image(img, pixel_depth)
+                img = pi.process_image(TEST_DIR + img, img_size)
+                img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
 
             label = label_img(img)
-
-            # img = cv2.imread(TRAIN_DIR + img)
-            # flip image at random if flag is selected
-            # img = cv2.flip(img, 1)
-            # rescale image
-            # img = cv2.resize(img, (img_size, img_size))
-            # img = img.astype(np.float32)
-            # # subtract mean
-            # img -= MEAN
 
             #dog
             if(label == 1):
@@ -88,14 +75,14 @@ def load_test_data(config):
     test_data = []
     if not os.path.exists(IMG_DIR + 'test_data' + str(img_size) + '.npy'):
         print('Reading and processing test images...')
-        for test in os.listdir(TEST_DIR):
-            index = test[:-4]
+        for img in os.listdir(TEST_DIR):
+            index = img[:-4]
 
             if model_name == 'Alex-Net':
-                img = pi.process_image(TEST_DIR + img, img_size, PIXEL_DEPTH, mean_vec=config.MEAN)
+                img = pi.process_image(TEST_DIR + img, img_size)
             else:
-                img = pi.process_image(TEST_DIR + img, img_size, PIXEL_DEPTH, mean_vec=None)
-                img = pi.normalize_image(img, pixel_depth)
+                img = pi.process_image(TEST_DIR + img, img_size)
+                img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
 
             test_data.append([np.array(img), index])
         np.save(IMG_DIR + 'test_data' + str(img_size) + '.npy', test_data)
@@ -138,16 +125,6 @@ def create_batches(train_dogs, train_cats, batch_size):
     return batches
 
 
-def split_batches(batches, mini_batch_size):
-
-    #split each batch in mini-batch
-
-    batches = np.array_split(batches, mini_batch_size)
-
-    for i in range(mini_batch_size):
-        np.save(BATCH_DIR + 'batch' + str(i) + '.npy', batches[i])
-
-
 def init_data(config):
 
     #loading data
@@ -174,34 +151,3 @@ def init_test_data(config):
     test_data = []
 
     return test_batches
-
-if __name__ == '__main__':
-    for img_size in IMG_SIZES:
-        train_dogs, train_cats = load_data(img_size)
-        print("Train Dogs: {}-{}".format(train_dogs.shape,
-                                         train_dogs[0][0].shape))
-        print("Train Cats: {}-{}".format(train_cats.shape,
-                                         train_cats[0][0].shape))
-    # train_dogs, train_cats = load_data(64)
-    # print("Train Dogs: {}".format(train_dogs.shape))
-    # print("Train Cats: {}".format(train_cats.shape))
-    # print(train_cats[0].shape)
-    # print(train_cats[0][0].shape)
-    # print(train_cats[0][1])
-    # batches = prepare_train_data(train_dogs, train_cats, 32)
-    # print(len(batches))
-    # split_batches(batches)
-
-    # plt.imshow(train_dogs[0][0], cmap='gray')
-    # plt.show()
-    # plt.imshow(train_dogs[1][0], interpolation='nearest')
-    # plt.figure()
-    # plt.imshow(train_dogs[2][0], interpolation='nearest')
-    # plt.figure()
-    # plt.imshow(train_cats[0][0], interpolation='nearest')
-    # plt.figure()
-    # plt.imshow(train_cats[1][0], interpolation='nearest')
-    # plt.figure()
-    # plt.imshow(train_cats[2][0], interpolation='nearest')
-    # plt.figure()
-    # prepare_train_data()

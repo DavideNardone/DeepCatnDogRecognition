@@ -199,11 +199,6 @@ class LeNet(object):
         # get checkpoint state
         if path:
             ckpt = tf.train.get_checkpoint_state(path)
-            print(ckpt)
-            print(ckpt)
-            print(ckpt)
-            print(ckpt)
-            sys.exit()
         else:
             ckpt = tf.train.get_checkpoint_state(self.config.ckpt_path)
         # restore session

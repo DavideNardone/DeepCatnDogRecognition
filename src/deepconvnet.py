@@ -96,7 +96,7 @@ class DeepConv(object):
             activation=tf.nn.relu
         )
 
-        #max pooling
+        # max pooling
         pool4 = tf.layers.max_pooling2d(inputs=conv4, pool_size=[2, 2], strides=(2, 2))
         # conv4_bn = tf.layers.batch_normalization(pool4)
 
@@ -177,7 +177,7 @@ class DeepConv(object):
             rate=self.config.dropout,
             training=training)
 
-        # fc4 = tf.layers.batch_normalization(fc4)
+        fc4 = tf.layers.batch_normalization(fc4)
 
         # One output: Confidence score of being a dog
         logits = tf.layers.dense(inputs=fc4, units=1, activation=tf.nn.sigmoid)

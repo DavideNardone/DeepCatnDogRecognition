@@ -13,14 +13,14 @@ matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
 from lenet import LeNet
-from deepconv import DeepConv
+from deepconvnet import DeepConv
 from alexnet import AlexNet
 
 # from deep_cnn_model import DeepModel
 from configs import Config
 from tools.loader import init_data
 
-graph_dir = '/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/graphs/'
+plot_dir = 'plots'
 
 # For Plots
 epoches = []
@@ -47,14 +47,14 @@ def save_plot_files(model_name, epoches, loss, acc, is_training=True):
         plt.plot(epoches, y_training_loss)
         plt.xlabel(x_label)
         plt.ylabel(y1_label)
-        plt.savefig(graph_dir + '/' + model_name + '/' + title1)
+        plt.savefig(plot_dir + '/' + model_name + '/' + title1)
 
         # saving accuracy
         plt.clf()
         plt.plot(epoches, y_training_accuracy)
         plt.xlabel(x_label)
         plt.ylabel(y2_label)
-        plt.savefig(graph_dir + '/' + model_name + '/' + title2)
+        plt.savefig(plot_dir + '/' + model_name + '/' + title2)
 
     else:
         y_valid_loss.append(loss)
@@ -71,14 +71,14 @@ def save_plot_files(model_name, epoches, loss, acc, is_training=True):
         plt.plot(epoches, y_valid_loss)
         plt.xlabel(x_label)
         plt.ylabel(y1_label)
-        plt.savefig(graph_dir + '/' + model_name + '/' + title1)
+        plt.savefig(plot_dir + '/' + model_name + '/' + title1)
 
         # saving accuracy
         plt.clf()
         plt.plot(epoches, y_valid_accuracy)
         plt.xlabel(x_label)
         plt.ylabel(y2_label)
-        plt.savefig(graph_dir + '/' + model_name + '/' + title2)
+        plt.savefig(plot_dir + '/' + model_name + '/' + title2)
 
 
 def run(model, train_batches, valid_batches):
@@ -86,8 +86,8 @@ def run(model, train_batches, valid_batches):
     print('Training the model')
 
     # create grap dir for each model
-    if not os.path.isdir(graph_dir + '/' + model.config.model_name):
-        os.mkdir(graph_dir + '/' + model.config.model_name)
+    if not os.path.isdir(plot_dir + '/' + model.config.model_name):
+        os.mkdir(plot_dir + '/' + model.config.model_name)
 
     try:
         for epoch in range(model.epochs):
@@ -153,15 +153,16 @@ def run(model, train_batches, valid_batches):
 
 if __name__ == '__main__':
 
-    model_type = sys.argv[1]
+    model_type = 'LE-NET'
 
     # Initialize model
     graph = tf.Graph()
-    tf.logging.set_verbosity(tf.logging.ERROR)
-    gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.9)
-    sess_config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True, gpu_options=gpu_options)
-    sess_config.gpu_options.allow_growth = True
-    sess = tf.Session(config=sess_config)
+    # tf.logging.set_verbosity(tf.logging.ERROR)
+    # gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.9)
+    # sess_config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True, gpu_options=gpu_options)
+    # sess_config.gpu_options.allow_growth = True
+    sess = tf.Session()
+
 
     if model_type == 'LE-NET':
         config = Config(model_type)
