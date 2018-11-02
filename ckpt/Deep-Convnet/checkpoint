@@ -1,6 +1,0 @@
-model_checkpoint_path: "/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/ckpt/Deep-Convnet/Deep-Convnet.ckpt-16"
-all_model_checkpoint_paths: "/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/ckpt/Deep-Convnet/Deep-Convnet.ckpt-12"
-all_model_checkpoint_paths: "/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/ckpt/Deep-Convnet/Deep-Convnet.ckpt-13"
-all_model_checkpoint_paths: "/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/ckpt/Deep-Convnet/Deep-Convnet.ckpt-14"
-all_model_checkpoint_paths: "/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/ckpt/Deep-Convnet/Deep-Convnet.ckpt-15"
-all_model_checkpoint_paths: "/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/ckpt/Deep-Convnet/Deep-Convnet.ckpt-16"
