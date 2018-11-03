@@ -161,9 +161,7 @@ def run(model, train_batches, valid_batches):
 
     except KeyboardInterrupt:
         print ('Training interrupted!')
-
-    # return model, epoch
-
+        
 
 if __name__ == '__main__':
 
