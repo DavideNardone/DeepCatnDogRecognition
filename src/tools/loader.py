@@ -36,9 +36,9 @@ def load_data(config):
         for img in os.listdir(TRAIN_DIR):
 
             if model_name == 'Alex-Net':
-                img = pi.process_image(TEST_DIR + img, img_size)
+                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
             else:
-                img = pi.process_image(TEST_DIR + img, img_size)
+                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
                 img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
 
             label = label_img(img)
@@ -79,9 +79,9 @@ def load_test_data(config):
             index = img[:-4]
 
             if model_name == 'Alex-Net':
-                img = pi.process_image(TEST_DIR + img, img_size)
+                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
             else:
-                img = pi.process_image(TEST_DIR + img, img_size)
+                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
                 img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
 
             test_data.append([np.array(img), index])
