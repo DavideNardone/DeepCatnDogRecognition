@@ -2,8 +2,8 @@
 
 It's all about being a:
 
-`1`: Dog <br>
 `0`: Cat <br>
+`1`: Dog <br>
 
 # Introduction
 
