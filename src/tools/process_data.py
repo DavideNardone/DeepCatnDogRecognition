@@ -2,14 +2,15 @@ import cv2
 import numpy as np
 
 
-def process_image(img, img_size):
+def process_image(img, img_size, horizontal_flip=False):
 
 
     # read the image
     img = cv2.imread(img)
 
-    # flip image at random if flag is selected
-    img = cv2.flip(img, 1)
+    #flip image at random if flag is selected
+    if horizontal_flip and np.random.random() < 0.5:
+        img = cv2.flip(img, 1)
 
     # rescale image
     img = cv2.resize(img, (img_size, img_size))
