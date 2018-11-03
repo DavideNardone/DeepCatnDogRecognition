@@ -17,6 +17,7 @@ class Config(object):
             self.image_size = 64
             self.channels = 3
             self.val_size = 0.1
+            self.flag_horiz = True
 
             # Saver
             self.model_name = 'LeNet'
@@ -33,9 +34,11 @@ class Config(object):
             self.epochs = 1000
             self.threshold = 0.5
 
+            # Data Processing
             self.image_size = 64
             self.channels = 3
             self.val_size = 0.1
+            self.flag_horiz = True
 
             self.model_name = 'Deep-Convnet'
             self.ckpt_path = 'ckpt/' + self.model_name
@@ -53,9 +56,11 @@ class Config(object):
             self.weights_path = 'bvlc_alexnet.npy'
             self.MEAN = [104., 117., 124.]
 
+            # Data Processing
             self.image_size = 227
             self.channels = 3
             self.val_size = 0.1
+            self.flag_horiz = True
 
             self.model_name = 'Alex-Net'
             self.ckpt_path = 'ckpt/' + self.model_name
