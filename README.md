@@ -65,31 +65,37 @@ The models accuracies achieved both on train and validation set on about *98 epo
 
 **TRAINING_SET**
 
-`LE-NET:` 
-+/- 0.78 ACC
-+/- 0.5 LOSS
+`LE-NET` 
+
++/- 0.78 ACC <br>
++/- 0.5 LOSS <br>
 
 `DEEP-CONVNET`
-+/- 0.86 ACC
-+/- 0.4 LOSS
+
++/- 0.86 ACC <br>
++/- 0.4 LOSS <br>
 
 `ALEX-NET`
-+/- 0.93 ACC
-+/- 0.9 LOSS
+
++/- 0.93 ACC <br>
++/- 0.9 LOSS <br>
 
 **VALIDATION SET**
 
-`LE-NET: #epoches 98` 
-+/- 0.70 ACC
-+/- 0.5 LOSS
+`LE-NET`
+
++/- 0.70 ACC <br>
++/- 0.5 LOSS <br>
 
 `DEEP-CONVNET`
-+/- 0.93 ACC
-+/- 0.2 LOSS
+
++/- 0.93 ACC <br>
++/- 0.2 LOSS <br>
 
 `ALEX-NET`
-+/- 0.9 ACC
-+/- 0.9 LOSS
+
++/- 0.9 ACC <br>
++/- 0.9 LOSS <br>
 
 NB: As you might know, DNN are ruled by several hyperparameters that in turn affect the fine tuning process. The results presented here might not be the best one since a better fine tuning process with a more efficient image pre-processing as well might led to better results on the validation set.
 
