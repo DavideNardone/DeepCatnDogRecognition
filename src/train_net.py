@@ -17,7 +17,7 @@ from alexnet import AlexNet
 from configs import Config
 from tools.loader import init_data
 
-graph_dir = '/home/davidenardone/TENSORFLOW/Cat-vs-Dog-Tensorflow-CNN/graphs/'
+graph_dir = 'graphs/'
 
 
 
