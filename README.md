@@ -59,6 +59,40 @@ The dataset used for train and test the DNN can be downloaded at the following l
 
 Once downloaded, you must unzip and locate it under the root project in order to make everything going smooth.
 
+# Results
+
+The models accuracies achieved both on train and validation set on about *98 epoches* are listed below:
+
+**TRAINING_SET**
+
+`LE-NET:` 
++/- 0.78 ACC
++/- 0.5 LOSS
+
+`DEEP-CONVNET`
++/- 0.86 ACC
++/- 0.4 LOSS
+
+`ALEX-NET`
++/- 0.93 ACC
++/- 0.9 LOSS
+
+**VALIDATION SET**
+
+`LE-NET: #epoches 98` 
++/- 0.70 ACC
++/- 0.5 LOSS
+
+`DEEP-CONVNET`
++/- 0.93 ACC
++/- 0.2 LOSS
+
+`ALEX-NET`
++/- 0.9 ACC
++/- 0.9 LOSS
+
+NB: As you might know, DNN are ruled by several hyperparameters that in turn affect the fine tuning process. The results presented here might not be the best one since a better fine tuning process with a more efficient image pre-processing as well might led to better results on the validation set.
+
 # Troubleshootings
 
 In case something goes wrong, make sure:
