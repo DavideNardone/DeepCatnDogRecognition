@@ -65,35 +65,29 @@ The models accuracies achieved both on train and validation set on about *98 epo
 
 **TRAINING_SET**
 
-`LE-NET` 
-
-+/- 0.78 ACC <br>
+`LE-NET` <br>
++/- 0.78 ACC 
 +/- 0.5 LOSS <br>
 
-`DEEP-CONVNET`
-
+`DEEP-CONVNET` <br>
 +/- 0.86 ACC <br>
 +/- 0.4 LOSS <br>
 
-`ALEX-NET`
-
+`ALEX-NET` <br>
 +/- 0.93 ACC <br>
 +/- 0.9 LOSS <br>
 
 **VALIDATION SET**
 
-`LE-NET`
-
+`LE-NET` <br>
 +/- 0.70 ACC <br>
 +/- 0.5 LOSS <br>
 
-`DEEP-CONVNET`
-
+`DEEP-CONVNET` <br>
 +/- 0.93 ACC <br>
 +/- 0.2 LOSS <br>
 
-`ALEX-NET`
-
+`ALEX-NET` <br>
 +/- 0.9 ACC <br>
 +/- 0.9 LOSS <br>
 
