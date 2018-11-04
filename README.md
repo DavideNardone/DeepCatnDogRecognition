@@ -40,6 +40,13 @@ Before training or testing any of the DNN available in this project, you must cr
 `mkdir ckpt` <br>
 `mkdir npys` <br>
 
+Once you've done it, you might need to proper set-up some paths, mainly located in the following python files:
+
+`src/train_net`
+`src/configs`
+`src/create_test_submission`
+`tools/loader`
+
 To train the network run:
 
 `python train_net.py <MODEL>`
