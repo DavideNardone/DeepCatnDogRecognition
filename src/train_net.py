@@ -1,11 +1,9 @@
 from __future__ import print_function
 
 import os
-
 import sys
 import numpy as np
 import tensorflow as tf
-
 import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
@@ -13,16 +11,14 @@ import matplotlib.pyplot as plt
 from lenet import LeNet
 from deepconvnet import DeepConv
 from alexnet import AlexNet
-
 from configs import Config
 from tools.loader import init_data
 
-graph_dir = 'graphs/'
-
+# REMEMBER TO RIGHTLY SET THE FOLLOWING PATH
+graph_dir = 'graphs'
 
 
 def save_plot_files(model_name, steps, loss, acc, is_training=True):
-
     if is_training == True:
 
         title1 = 'training_loss.png'
@@ -69,7 +65,6 @@ def save_plot_files(model_name, steps, loss, acc, is_training=True):
 
 
 def run(model, train_batches, valid_batches):
-
     # For Plots
     steps_train = []
     steps_val = []
@@ -96,7 +91,6 @@ def run(model, train_batches, valid_batches):
 
             # loop on the batches
             for train_batch in train_batches:
-
                 train_batch_images, train_batch_labels = map(list, zip(*train_batch))
 
                 train_batch_images = np.array(train_batch_images)
@@ -109,20 +103,19 @@ def run(model, train_batches, valid_batches):
                 train_loss += batch_train_loss
                 train_acc += batch_train_acc
 
-                #plot variables
+                # plot variables
                 y_training_loss.append(batch_train_loss)
                 y_training_accuracy.append(batch_train_acc)
                 steps_train.append(step_train)
                 step_train += 1
 
-            #saving loss and acc on train batches
+            # saving loss and acc on train batches
             save_plot_files(model.config.model_name, steps_train, y_training_loss, y_training_accuracy, True)
 
-            avg_train_loss = train_loss/len(train_batches)
-            avg_train_acc = train_acc/len(train_batches)
+            avg_train_loss = train_loss / len(train_batches)
+            avg_train_acc = train_acc / len(train_batches)
 
             print('Epoch: %d, Train Loss: %f, Train  Acc: %f' % (epoch + 1, avg_train_loss, avg_train_acc))
-
 
             # validate the model after every epoch
             np.random.shuffle(valid_batches)
@@ -143,11 +136,11 @@ def run(model, train_batches, valid_batches):
                 steps_val.append(step_val)
                 step_val += 1
 
-            #saving loss and acc on val batches
+            # saving loss and acc on val batches
             save_plot_files(model.config.model_name, steps_val, y_valid_loss, y_valid_accuracy, False)
 
-            avg_val_loss = val_loss/len(valid_batches)
-            avg_val_acc = val_acc/len(valid_batches)
+            avg_val_loss = val_loss / len(valid_batches)
+            avg_val_acc = val_acc / len(valid_batches)
 
             print('Epoch: %d, Valid Loss: %f, Valid Acc: %f' % (epoch + 1, avg_val_loss, avg_val_acc))
 
@@ -155,21 +148,31 @@ def run(model, train_batches, valid_batches):
             print('saving checkpoint')
             model.save(epoch)
 
-            #storing tensorboard results after every epoch
+            # storing tensorboard results after every epoch
             model.writer.add_summary(summary, epoch)
 
 
     except KeyboardInterrupt:
-        print ('Training interrupted!')
-        
+        print('Training interrupted!')
+
 
 if __name__ == '__main__':
 
+    # flag for using GPU or CPU computation
+    GPU = True
+
     model_type = sys.argv[1]
+
+    sess_config = None
+
+    if GPU is True:
+        gpu_options = tf.GPUOptions(per_process_gpu_memory_fraction=0.9)
+        sess_config = tf.ConfigProto(allow_soft_placement=True, log_device_placement=True, gpu_options=gpu_options)
+        sess_config.gpu_options.allow_growth = True
 
     # Initialize model
     graph = tf.Graph()
-    sess = tf.Session()
+    sess = tf.Session(config=sess_config)
 
     if model_type == 'LE-NET':
         config = Config(model_type)

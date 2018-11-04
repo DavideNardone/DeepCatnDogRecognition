@@ -3,17 +3,18 @@ from __future__ import print_function
 import numpy as np
 import os
 import process_data as pi
-import cPickle as pickle
 
-TRAIN_DIR = 'train/'
-TEST_DIR = 'test/'
-IMG_DIR = 'npys/'
+# REMEMBER TO RIGHTLY SET THE FOLLOWING PATH
+TRAIN_DIR = 'train'
+TEST_DIR = 'test'
+IMG_DIR = 'npys'
 
 IMG_SIZES = [64, 227]
 PIXEL_DEPTH = 255.0
 
 
 def label_img(img):
+
     word_label = img.split('.')[-3]
 
     if word_label == 'cat':
@@ -31,17 +32,17 @@ def load_data(config):
     img_size = config.image_size
     model_name = config.model_name
 
-    if (not os.path.exists(IMG_DIR + 'train_dogs' + str(img_size) + '.npy')) and (not os.path.exists(IMG_DIR + 'train_cats' + str(img_size) + '.npy')):
+    if (not os.path.exists(IMG_DIR + '/train_dogs' + str(img_size) + '.npy')) and (not os.path.exists(IMG_DIR + 'train_cats' + str(img_size) + '.npy')):
         print('Reading and processing train images...')
         for img in os.listdir(TRAIN_DIR):
 
-            if model_name == 'Alex-Net':
-                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
-            else:
-                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
-                img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
-
             label = label_img(img)
+
+            if model_name == 'Alex-Net':
+                img = pi.process_image(TRAIN_DIR + '/' + img, img_size, config.flag_horiz)
+            else:
+                img = pi.process_image(TRAIN_DIR + '/' +  img, img_size, config.flag_horiz)
+                img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
 
             #dog
             if(label == 1):
@@ -50,12 +51,12 @@ def load_data(config):
             else:
                 train_cats.append([np.array(img), label])
 
-        np.save(IMG_DIR + 'train_dogs' + str(img_size) + '.npy', train_dogs)
-        np.save(IMG_DIR + 'train_cats' + str(img_size) + '.npy', train_cats)
+        np.save(IMG_DIR + '/train_dogs' + str(img_size) + '.npy', train_dogs)
+        np.save(IMG_DIR + '/train_cats' + str(img_size) + '.npy', train_cats)
     else:
         print('Loading train set...')
-        train_cats = np.load(IMG_DIR + 'train_cats' + str(img_size) + '.npy')
-        train_dogs = np.load(IMG_DIR + 'train_dogs' + str(img_size) + '.npy')
+        train_cats = np.load(IMG_DIR + '/train_cats' + str(img_size) + '.npy')
+        train_dogs = np.load(IMG_DIR + '/train_dogs' + str(img_size) + '.npy')
 
     print('Done!')
 
@@ -73,22 +74,22 @@ def load_test_data(config):
     model_name = config.model_name
 
     test_data = []
-    if not os.path.exists(IMG_DIR + 'test_data' + str(img_size) + '.npy'):
+    if not os.path.exists(IMG_DIR + '/test_data' + str(img_size) + '.npy'):
         print('Reading and processing test images...')
         for img in os.listdir(TEST_DIR):
             index = img[:-4]
 
             if model_name == 'Alex-Net':
-                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
+                img = pi.process_image(TEST_DIR + '/' + img, img_size, config.flag_horiz)
             else:
-                img = pi.process_image(TEST_DIR + img, img_size, config.flag_horiz)
+                img = pi.process_image(TEST_DIR + '/' + img, img_size, config.flag_horiz)
                 img = pi.normalize_image(img, PIXEL_DEPTH, mean_vec=None)
 
             test_data.append([np.array(img), index])
-        np.save(IMG_DIR + 'test_data' + str(img_size) + '.npy', test_data)
+        np.save(IMG_DIR + '/test_data' + str(img_size) + '.npy', test_data)
     else:
         print('Loading test set...')
-        test_data = np.load(IMG_DIR + 'test_data' + str(img_size) + '.npy')
+        test_data = np.load(IMG_DIR + '/test_data' + str(img_size) + '.npy')
 
     return np.array(test_data)
 
@@ -96,7 +97,6 @@ def load_test_data(config):
 def prepare_test_data(test_data):
 
     # split each batch in batches
-
     n = 100
     print("Generating test batches...")
     batches = np.array(np.array_split(test_data, n))

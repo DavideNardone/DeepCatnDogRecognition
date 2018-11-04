@@ -1,6 +1,6 @@
 class Config(object):
 
-    def __init__(self, type_of_model):
+      def __init__(self, type_of_model):
 
         if type_of_model == 'LE-NET':
 
@@ -42,7 +42,6 @@ class Config(object):
 
             self.model_name = 'Deep-Convnet'
             self.ckpt_path = 'ckpt/' + self.model_name
-
         elif type_of_model == 'ALEX-NET':
 
             # Hyperparameters
