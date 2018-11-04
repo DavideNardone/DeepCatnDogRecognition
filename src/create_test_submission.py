@@ -16,8 +16,8 @@ TYPE_OF_MODEL = sys.argv[1]
 print("Testing with " + TYPE_OF_MODEL + " CNN Model")
 
 # REMEMBER TO RIGHTLY SET THE FOLLOWING PATH
-TEST_DIR = 'test/'
-RESULT_DIR = 'results/'
+TEST_DIR = 'test'
+RESULT_DIR = 'results'
 
 # Process test data and create batches in memory
 graph = tf.Graph()
@@ -42,7 +42,7 @@ print(TYPE_OF_MODEL + " CNN Model Restored")
 test_batches = init_test_data(model.config)
 
 # Get the predictions and write them into a CSV file
-with open(RESULT_DIR + TYPE_OF_MODEL + '.csv', 'wb') as csvfile:
+with open(RESULT_DIR + '/' + TYPE_OF_MODEL + '.csv', 'wb') as csvfile:
     writer = csv.writer(csvfile)
     writer.writerow(['id', 'label'])
 
