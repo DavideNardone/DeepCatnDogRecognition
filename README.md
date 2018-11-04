@@ -7,17 +7,17 @@ It's all about being a:
 
 # Introduction
 
-This project proposes three differents Deep Neural Network (DNN) to face the well known *Kaggle Dog and Cat Classification* challenge. You can get more detail about at https://www.kaggle.com/c/dogs-vs-cats.
+This project proposes three differents Deep Neural Network (DNN) to face the well known *Kaggle Dog and Cat Classification* challenge. You can get more details about it at https://www.kaggle.com/c/dogs-vs-cats.
 
-The DNN here used for the purpose of beating the challenge are the followings:
+The DNN here used for the purpose of beating the challenge are the following:
 
 - `LeNet`
 - `DeepConvNet`
 - `AlexNet` (pre-trained model)
 
-You can find more information abou these DNN here: https://medium.com/@sidereal/cnns-architectures-lenet-alexnet-vgg-googlenet-resnet-and-more-666091488df5
+You can find more information about these DNN here: https://medium.com/@sidereal/cnns-architectures-lenet-alexnet-vgg-googlenet-resnet-and-more-666091488df5
 
-Each of these DNN is really sensible to several hyperparameters, which in turn provide a better or a worse finetuning.
+Each of these DNN is really sensible to several hyperparameters, which in turn provide a better or worse fine tuning.
 
 # Requirements
 
@@ -33,14 +33,15 @@ First of all, download the repository by running:
 
 `unzip DeepCatnDogRecognition-master.py`
 
-Before training or testing any of the DNN available in this project, you must create some directories by running the following commands:
+Before training or testing any of the DNN available in this project, you must create some directories under the root project
+by running the following commands:
 
 `mkdir plots` <br>
 `mkdir results` <br>
 `mkdir ckpt` <br>
 `mkdir npys` <br>
 
-Once you've done it, you might need to proper set-up some paths, mainly located in the following python files:
+Once you've done this, you might need to set up some paths, located in the following python files:
 
 `src/train_net`
 `src/configs`
@@ -56,7 +57,7 @@ where the `MODEL` parameter specify the kind of DNN you want to train (e.g., LE-
 The latter network is a pre-trained network and it works by loading its proper weights which can be downloaded at the following link: <br>
 http://www.cs.toronto.edu/~guerzhoy/tf_alexnet/ that need to be located at the root of the project folder.
 
-To reproduce the submission test useful for classify the test set, run the following command:
+To create the submission test useful for classifying the test set, run the following command:
 
 `python create_test_submission.py <MODEL>`
 
@@ -64,7 +65,7 @@ To reproduce the submission test useful for classify the test set, run the follo
 
 The dataset used for train and test the DNN can be downloaded at the following link: https://www.kaggle.com/c/dogs-vs-cats-redux-kernels-edition/data
 
-Once downloaded, you must unzip and locate it under the root project in order to make everything going smooth.
+Once you've downloaded it, you must unzip and locate it under the root project in order to make everything run smoothly.
 
 # Results
 
@@ -98,15 +99,15 @@ The models accuracies achieved both on train and validation set on about *98 epo
 +/- 0.9 ACC <br>
 +/- 0.9 LOSS <br>
 
-NB: As you might know, DNN are ruled by several hyperparameters that in turn affect the fine tuning process. The results presented here might not be the best one since a better fine tuning process with a more efficient image pre-processing as well might led to better results on the validation set.
+NB: As you might know, DNN are ruled by several hyperparameters that in turn affect the fine tuning process. The results presented here might not be the best one since a better fine tuning process and a more efficient image pre-processing as well might led to better results.
 
 # Troubleshootings
 
 In case something goes wrong, make sure:
 
 1. You've created all the required directories
-2. Any configuration path is rightly set-up
-3. You've the right library versions
+2. Any configuration path is rightly set up
+3. You've installed the right library versions
 
 # Authors
 
