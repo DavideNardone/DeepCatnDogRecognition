@@ -17,7 +17,7 @@ The DNN here used for the purpose of beating the challenge are the following:
 
 You can find more information about these DNN here: https://medium.com/@sidereal/cnns-architectures-lenet-alexnet-vgg-googlenet-resnet-and-more-666091488df5
 
-Each of these DNN is really sensible to several hyperparameters, which in turn provide a better or worse fine tuning.
+Each of these DNN is really sensitive to several hyperparameters, which in turn provide a better or worse fine tuning.
 
 # Requirements
 
