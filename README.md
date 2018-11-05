@@ -69,18 +69,21 @@ Once you've downloaded it, you must unzip and locate it under the root project i
 
 # Results
 
-The models accuracies achieved both on train and validation set on about *98 epoches* are listed below:
+The models accuracy/loss achieved both on train and validation are shown below:
 
 **TRAINING_SET**
-
+ 
+ **EPOCHES: ~98** <br> 
 `LE-NET` <br>
 +/- 0.78 ACC  <br>
 +/- 0.5 LOSS <br>
 
+ **EPOCHES: ~20** <br> 
 `DEEP-CONVNET` <br>
 +/- 0.86 ACC <br>
 +/- 0.4 LOSS <br>
 
+ **EPOCHES: ~40** <br> 
 `ALEX-NET` <br>
 +/- 0.93 ACC <br>
 +/- 0.9 LOSS <br>
