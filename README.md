@@ -73,18 +73,15 @@ The models accuracy/loss achieved both on train and validation are shown below:
 
 **TRAINING_SET**
  
- **EPOCHES: ~98** <br> 
-`LE-NET` <br>
+`LE-NET (~98 epoches)` <br>
 +/- 0.78 ACC  <br>
 +/- 0.5 LOSS <br>
-
- **EPOCHES: ~20** <br> 
-`DEEP-CONVNET` <br>
+ 
+`DEEP-CONVNET (~20 epoches)` <br>
 +/- 0.86 ACC <br>
 +/- 0.4 LOSS <br>
 
- **EPOCHES: ~15** <br> 
-`ALEX-NET` <br>
+`ALEX-NET (~15 epoches)` <br>
 +/- 0.93 ACC <br>
 +/- 0.9 LOSS <br>
 
