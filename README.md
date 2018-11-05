@@ -83,7 +83,7 @@ The models accuracy/loss achieved both on train and validation are shown below:
 +/- 0.86 ACC <br>
 +/- 0.4 LOSS <br>
 
- **EPOCHES: ~40** <br> 
+ **EPOCHES: ~15** <br> 
 `ALEX-NET` <br>
 +/- 0.93 ACC <br>
 +/- 0.9 LOSS <br>
