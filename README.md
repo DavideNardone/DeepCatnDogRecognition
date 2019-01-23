@@ -99,7 +99,7 @@ The models accuracy/loss achieved both on train and validation are shown below:
 +/- 0.9 ACC <br>
 +/- 0.9 LOSS <br>
 
-NB: As you might know, DNN are ruled by several hyperparameters that in turn affect the fine tuning process. The results presented here might not be the best one since a better fine tuning process and a more efficient image pre-processing as well might led to better results.
+NB: As you might know, DNN are ruled by several hyperparameters that in turn affect the fine tuning process. The results presented here might not be the best one since a better fine tuning process and a more efficient image pre-processing might led to better results.
 
 # Troubleshootings
 
